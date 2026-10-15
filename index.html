@@ -1,41 +1,83 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>German B2 Exam Prep</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÖSD B2 Vorbereitung</title>
     <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body class="bg-slate-900 text-white min-h-screen flex flex-col items-center justify-center p-4">
-    <div class="max-w-md w-full bg-slate-800 rounded-2xl p-6 shadow-xl text-center border border-slate-700">
-      <h1 class="text-3xl font-bold text-amber-400 mb-2">ÖSD B2 Vorbereitung</h1>
-      <p class="text-slate-300 text-sm mb-6">Deutsches B2 Zertifikat Training App</p>
+</head>
+<body class="bg-slate-900 text-white min-h-screen p-4 flex flex-col items-center">
+    <div class="max-w-md w-full space-y-4">
+        <h1 class="text-2xl font-bold text-center text-yellow-400">ÖSD B2 Vorbereitung</h1>
+        <p class="text-xs text-center text-slate-400">Deutsches B2 Zertifikat Training App</p>
 
-      <div class="space-y-3 text-left">
-        <div class="p-3 bg-slate-700/50 rounded-lg border border-slate-600">
-          <h2 class="font-bold text-emerald-400">📖 Leseverstehen (Reading)</h2>
-          <p class="text-xs text-slate-300 mt-1">4 Teile: Zeitungstexte, Reaktionen, Anzeigentexte, Stellungnahmen</p>
+        <!-- Navigation Tabs -->
+        <div class="grid grid-cols-2 gap-2 text-sm">
+            <button onclick="showTab('lesen')" class="bg-slate-800 hover:bg-slate-700 p-2 rounded border border-slate-700 text-emerald-400 font-medium">📖 Lesen</button>
+            <button onclick="showTab('hoeren')" class="bg-slate-800 hover:bg-slate-700 p-2 rounded border border-slate-700 text-cyan-400 font-medium">🎧 Hören</button>
+            <button onclick="showTab('schreiben')" class="bg-slate-800 hover:bg-slate-700 p-2 rounded border border-slate-700 text-amber-400 font-medium">✍️ Schreiben</button>
+            <button onclick="showTab('sprechen')" class="bg-slate-800 hover:bg-slate-700 p-2 rounded border border-slate-700 text-purple-400 font-medium">🗣️ Sprechen</button>
         </div>
 
-        <div class="p-3 bg-slate-700/50 rounded-lg border border-slate-600">
-          <h2 class="font-bold text-cyan-400">🎧 Hörverstehen (Listening)</h2>
-          <p class="text-xs text-slate-300 mt-1">2 Teile: Radiosendungen, Interviews, Meinungen</p>
-        </div>
+        <!-- Dynamic Content Area -->
+        <div id="content" class="bg-slate-800 p-4 rounded-lg border border-slate-700 min-h-[250px]">
+            <!-- Default Content -->
+            <div id="default-view">
+                <h2 class="text-lg font-bold mb-2">Willkommen!</h2>
+                <p class="text-sm text-slate-300">Wähle ein Modul oben aus, um mit dem Training zu beginnen.</p>
+            </div>
+            
+            <div id="lesen-view" class="hidden">
+                <h2 class="text-lg font-bold text-emerald-400 mb-2">Leseverstehen Practice</h2>
+                <p class="text-sm mb-4">Frage 1: Was bedeutet "Ausfallzeit"?</p>
+                <button onclick="checkAnswer(true)" class="block w-full text-left p-2 bg-slate-700 hover:bg-slate-600 rounded mb-2 text-sm">A) Betriebsunterbrechung</button>
+                <button onclick="checkAnswer(false)" class="block w-full text-left p-2 bg-slate-700 hover:bg-slate-600 rounded mb-2 text-sm">B) Arbeitszeit</button>
+                <p id="quiz-result" class="mt-2 text-sm font-semibold"></p>
+            </div>
 
-        <div class="p-3 bg-slate-700/50 rounded-lg border border-slate-600">
-          <h2 class="font-bold text-rose-400">✍️ Schreiben (Writing)</h2>
-          <p class="text-xs text-slate-300 mt-1">E-Mails, Meinungsäußerung, ÖSD B2 Kriterien Checklist</p>
-        </div>
+            <div id="hoeren-view" class="hidden">
+                <h2 class="text-lg font-bold text-cyan-400 mb-2">Hörverstehen</h2>
+                <p class="text-sm text-slate-300">Hörübungen und Audio-Trainings werden hier geladen.</p>
+            </div>
 
-        <div class="p-3 bg-slate-700/50 rounded-lg border border-slate-600">
-          <h2 class="font-bold text-purple-400">🗣️ Sprechen (Speaking)</h2>
-          <p class="text-xs text-slate-300 mt-1">Bildbeschreibung, Diskussion, Problemlösung</p>
-        </div>
-      </div>
+            <div id="schreiben-view" class="hidden">
+                <h2 class="text-lg font-bold text-amber-400 mb-2">Schreiben Redemittel</h2>
+                <ul class="list-disc list-inside text-sm text-slate-300 space-y-1">
+                    <li>Ich schreibe Ihnen bezüglich...</li>
+                    <li>Darüber hinaus möchte ich betonen...</li>
+                    <li>Ich bedanke mich im Voraus.</li>
+                </ul>
+            </div>
 
-      <div class="mt-6 pt-4 border-t border-slate-700">
-        <p class="text-xs text-amber-300/80">✅ Status: B2 App successfully deployed on Vercel!</p>
-      </div>
+            <div id="sprechen-view" class="hidden">
+                <h2 class="text-lg font-bold text-purple-400 mb-2">Sprechen: Bildbeschreibung</h2>
+                <p class="text-sm text-slate-300 mb-2">Auf dem Bild kann man sehen...</p>
+                <p class="text-sm text-slate-300">Ein wichtiger Punkt ist...</p>
+            </div>
+        </div>
     </div>
-  </body>
+
+    <script>
+        function showTab(tab) {
+            ['default-view', 'lesen-view', 'hoeren-view', 'schreiben-view', 'sprechen-view'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            document.getElementById(tab + '-view').classList.remove('hidden');
+        }
+
+        function checkAnswer(isCorrect) {
+            const res = document.getElementById('quiz-result');
+            if (isCorrect) {
+                res.textContent = "Richtig! ✅";
+                res.className = "mt-2 text-sm font-semibold text-green-400";
+            } else {
+                res.textContent = "Falsch! Versuche es nochmal. ❌";
+                res.className = "mt-2 text-sm font-semibold text-red-400";
+            }
+        }
+    </script>
+</body>
 </html>
+
+
+
